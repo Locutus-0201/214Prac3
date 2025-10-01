@@ -32,7 +32,7 @@ public:
 	
 	virtual ~ChatRoom() { delete chatHistory; }
     
-    // Abstract methods - must be implemented by derived classes
+    // Abstract methods - must be implemented in derived classes
     /**
      * @brief Register a user to the chat room.
      * @param user Reference to the user to register.

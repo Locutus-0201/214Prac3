@@ -1,10 +1,8 @@
 /**
  * @file Command.cpp
- * @brief Provides a defensive default implementation (should not be used).
+ * @brief Provides a default implementation
  *
- * The base Command interface declares a pure virtual execute(), but providing
- * a definition that throws can help during debugging if a vtable mismatch
- * occurs or a call is made on a partially constructed object.
+ * The base Command interface declares a pure virtual execute()
  */
 
 #include "Command.h"

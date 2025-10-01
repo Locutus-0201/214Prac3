@@ -3,8 +3,7 @@
  * @brief Concrete chat room (mediator) implementation named CtrlCat.
  *
  * Provides storage for Users and orchestrates broadcasting messages. Uses the
- * Iterator pattern (ConcreteUserIterator) to traverse users without exposing
- * the underlying container type.
+ * Iterator pattern "ConcreteUserIterator" to traverse users.
  */
 #ifndef CTRLCAT_H
 #define CTRLCAT_H
@@ -16,11 +15,11 @@
 
 /**
  * @class CtrlCat
- * @brief Concrete ChatRoom used in tests/demonstrations.
+ * @brief Concrete ChatRoom used in tests.
  */
 class CtrlCat : public ChatRoom {
 private:
-    std::vector<Users*> users; ///< Registered users in this room.
+    std::vector<Users*> users; // Registered users in this room.
 
 public:
     /** @copydoc ChatRoom::registerUser */

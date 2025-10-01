@@ -6,7 +6,7 @@
  * Part of the State pattern implementation for user presence.
  *
  * @author Aaron Kim, Damian Moustakis
- * @date 2025-10-01
+ * @date 2025-09-30
  */
 #ifndef ACTIVESTATE_H
 #define ACTIVESTATE_H

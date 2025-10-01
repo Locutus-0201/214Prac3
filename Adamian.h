@@ -6,7 +6,7 @@
  * placeholder for potential specialized behaviour or attributes.
  *
  * @author Aaron Kim, Damian Moustakis
- * @date 2025-10-01
+ * @date 2025-09-30
  */
 #ifndef ADAMIAN_H
 #define ADAMIAN_H

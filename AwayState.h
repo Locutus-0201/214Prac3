@@ -3,7 +3,7 @@
  * @brief Concrete state representing a user who is away.
  *
  * Away users still receive messages immediately but the display output makes
- * it explicit they are away (could be extended with auto-replies).
+ * it explicit they are away
  */
 #ifndef AWAYSTATE_H
 #define AWAYSTATE_H
@@ -17,7 +17,7 @@
 class AwayState : public UserState {
 public:
     /**
-     * @brief Handle a message for an away user, indicating auto-reply.
+     * @brief Handle a message for an away user
      */
     void handleMessage(Users* user, const std::string& message, Users& fromUser, ChatRoom& room) override;
     /**

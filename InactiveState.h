@@ -16,7 +16,7 @@
 class InactiveState : public UserState {
 public:
     /**
-     * @brief Handle a message for an inactive user (currently logs queuing).
+     * @brief Handle a message for an inactive user.
      */
     void handleMessage(Users* user, const std::string& message, Users& fromUser, ChatRoom& room) override;
     /**

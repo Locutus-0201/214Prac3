@@ -1,0 +1,1365 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>214Prac3 – Consolidated Documentation</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;line-height:1.4;margin:2rem;}
+pre{background:#f5f5f5;padding:1rem;overflow:auto;border:1px solid #ddd;font-size:13px;}
+code{font-family:Consolas,Monaco,'Courier New',monospace;}
+h1,h2,h3{font-weight:600;}
+.table-of-contents a{text-decoration:none;color:#0645ad;}
+.section{margin-bottom:2.5rem;}
+hr{margin:3rem 0;}
+.small{font-size:0.8rem;color:#666;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style></head><body>
+<ul>
+<li><a href="#Aaron_h">Aaron.h</a></li>
+<li><a href="#ActiveState_cpp">ActiveState.cpp</a></li>
+<li><a href="#ActiveState_h">ActiveState.h</a></li>
+<li><a href="#Adamian_h">Adamian.h</a></li>
+<li><a href="#AwayState_cpp">AwayState.cpp</a></li>
+<li><a href="#AwayState_h">AwayState.h</a></li>
+<li><a href="#Ayrtonn_h">Ayrtonn.h</a></li>
+<li><a href="#ChatRoom_cpp">ChatRoom.cpp</a></li>
+<li><a href="#ChatRoom_h">ChatRoom.h</a></li>
+<li><a href="#Command_cpp">Command.cpp</a></li>
+<li><a href="#Command_h">Command.h</a></li>
+<li><a href="#ConcreteUserIterator_h">ConcreteUserIterator.h</a></li>
+<li><a href="#CtrlCat_h">CtrlCat.h</a></li>
+<li><a href="#Dogorithm_h">Dogorithm.h</a></li>
+<li><a href="#InactiveState_cpp">InactiveState.cpp</a></li>
+<li><a href="#InactiveState_h">InactiveState.h</a></li>
+<li><a href="#SaveMessageCommand_cpp">SaveMessageCommand.cpp</a></li>
+<li><a href="#SaveMessageCommand_h">SaveMessageCommand.h</a></li>
+<li><a href="#SendMessageCommand_cpp">SendMessageCommand.cpp</a></li>
+<li><a href="#SendMessageCommand_h">SendMessageCommand.h</a></li>
+<li><a href="#TestingMain_cpp">TestingMain.cpp</a></li>
+<li><a href="#UserIterator_h">UserIterator.h</a></li>
+<li><a href="#UserState_h">UserState.h</a></li>
+<li><a href="#Users_cpp">Users.cpp</a></li>
+<li><a href="#Users_h">Users.h</a></li>
+</ul>
+
+<hr />
+<div class="section" id="Aaron_h">
+<h2>Aaron.h</h2>
+<pre><code>/**
+ * @file Aaron.h
+ * @brief Declares the concrete user type Aaron.
+ *
+ * A lightweight concrete Users subclass used to demonstrate that the system
+ * can support many specific user/persona classes without additional logic.
+ * Additional behaviour could be added here in future (e.g. custom filters).
+ *
+ * @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#ifndef AARON_H
+#define AARON_H
+
+#include &quot;Users.h&quot;
+
+/**
+ * @class Aaron
+ * @brief Concrete user type representing the user &quot;Aaron&quot;.
+ *
+ * Inherits all behaviour from Users; exists to illustrate that concrete user
+ * types can be declared and potentially extended independently.
+ */
+class Aaron : public Users {
+public:
+    using Users::Users; ///&lt; Inherit base constructors.
+};
+
+#endif
+</code></pre>
+</div>
+
+<div class="section" id="ActiveState_cpp">
+<h2>ActiveState.cpp</h2>
+<pre><code>/**
+ * @file ActiveState.cpp
+ * @brief Implements the ActiveState behaviour.
+ */
+
+#include &quot;ActiveState.h&quot;
+#include &quot;Users.h&quot;
+#include &quot;ChatRoom.h&quot;
+#include &lt;iostream&gt;
+
+void ActiveState::handleMessage(Users* user, const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) {
+    std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; (ACTIVE) received: &quot; &lt;&lt; message &lt;&lt; std::endl;
+}
+
+std::string ActiveState::getStatusName() {
+    return &quot;Active&quot;;
+}
+
+bool ActiveState::canReceiveMessages() {
+    return true;
+}</code></pre>
+</div>
+
+<div class="section" id="ActiveState_h">
+<h2>ActiveState.h</h2>
+<pre><code>/**
+ * @file ActiveState.h
+ * @brief Concrete state representing an active (fully available) user.
+ *
+ * In this state the user receives messages immediately without modification.
+ * Part of the State pattern implementation for user presence.
+ *
+ * @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#ifndef ACTIVESTATE_H
+#define ACTIVESTATE_H
+
+#include &quot;UserState.h&quot;
+
+/**
+ * @class ActiveState
+ * @brief Implements behaviour for users that are currently active.
+ */
+class ActiveState : public UserState {
+public:
+    /**
+     * @brief Handle an incoming message for an active user.
+     * @param user The receiving user.
+     * @param message The message text.
+     * @param fromUser The sender.
+     * @param room The chat room where the message originated.
+     */
+    void handleMessage(Users* user, const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) override;
+    /**
+     * @brief Get a human readable status string.
+     * @return &quot;Active&quot;.
+     */
+    std::string getStatusName() override;
+    /**
+     * @brief Whether messages are delivered immediately in this state.
+     * @return Always true for ActiveState.
+     */
+    bool canReceiveMessages() override;
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="Adamian_h">
+<h2>Adamian.h</h2>
+<pre><code>/**
+ * @file Adamian.h
+ * @brief Declares the concrete user type Adamian.
+ *
+ * This class currently only inherits constructors from Users and serves as a
+ * placeholder for potential specialized behaviour or attributes.
+ *
+ * @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#ifndef ADAMIAN_H
+#define ADAMIAN_H
+
+#include &quot;Users.h&quot;
+
+/**
+ * @class Adamian
+ * @brief Concrete user type representing the user &quot;Adamian&quot;.
+ */
+class Adamian : public Users {
+public:
+    using Users::Users; ///&lt; Inherit base constructors.
+};
+
+#endif
+</code></pre>
+</div>
+
+<div class="section" id="AwayState_cpp">
+<h2>AwayState.cpp</h2>
+<pre><code>/**
+ * @file AwayState.cpp
+ * @brief Implements the AwayState behaviour.
+ */
+
+#include &quot;AwayState.h&quot;
+#include &quot;Users.h&quot;
+#include &quot;ChatRoom.h&quot;
+#include &lt;iostream&gt;
+
+void AwayState::handleMessage(Users* user, const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) {
+    std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; (AWAY) - Auto-reply: &#x27;I&#x27;m away, will respond later&#x27;&quot; &lt;&lt; std::endl;
+    // Future enhancement: queue or send an auto-reply message back
+}
+
+std::string AwayState::getStatusName() {
+    return &quot;Away&quot;;
+}
+
+bool AwayState::canReceiveMessages() {
+    return true;
+}</code></pre>
+</div>
+
+<div class="section" id="AwayState_h">
+<h2>AwayState.h</h2>
+<pre><code>/**
+ * @file AwayState.h
+ * @brief Concrete state representing a user who is away.
+ *
+ * Away users still receive messages immediately but the display output makes
+ * it explicit they are away (could be extended with auto-replies).
+ */
+#ifndef AWAYSTATE_H
+#define AWAYSTATE_H
+
+#include &quot;UserState.h&quot;
+
+/**
+ * @class AwayState
+ * @brief Implements behaviour for users that are marked as away.
+ */
+class AwayState : public UserState {
+public:
+    /**
+     * @brief Handle a message for an away user, indicating auto-reply.
+     */
+    void handleMessage(Users* user, const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) override;
+    /**
+     * @brief Get the status name.
+     * @return &quot;Away&quot;.
+     */
+    std::string getStatusName() override;
+    /**
+     * @brief Away users still conceptually receive messages.
+     * @return true.
+     */
+    bool canReceiveMessages() override;
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="Ayrtonn_h">
+<h2>Ayrtonn.h</h2>
+<pre><code>/**
+ * @file Ayrtonn.h
+ * @brief Declares the concrete user type Ayrtonn.
+ *
+ * A minimal Users subclass for demonstration &amp; test coverage of multi-room
+ * membership and state changes.
+ *
+ * @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#ifndef AYRTONN_H
+#define AYRTONN_H
+
+#include &quot;Users.h&quot;
+
+/**
+ * @class Ayrtonn
+ * @brief Concrete user type representing the user &quot;Ayrtonn&quot;.
+ */
+class Ayrtonn : public Users {
+public:
+    using Users::Users; ///&lt; Inherit base constructors.
+};
+
+#endif
+</code></pre>
+</div>
+
+<div class="section" id="ChatRoom_cpp">
+<h2>ChatRoom.cpp</h2>
+<pre><code>/**
+ * @file ChatRoom.cpp
+ * @brief Provides shared (non-abstract) ChatRoom functionality.
+ */
+
+#include &quot;ChatRoom.h&quot;
+#include &quot;Users.h&quot;
+
+void ChatRoom::saveMessage(const std::string&amp; message, Users&amp; fromUser) {
+    if (this-&gt;chatHistory == nullptr) {
+        this-&gt;chatHistory = new std::string();
+    }
+    *this-&gt;chatHistory += message + &quot;\n&quot;; // Simple append; could be timestamped
+}</code></pre>
+</div>
+
+<div class="section" id="ChatRoom_h">
+<h2>ChatRoom.h</h2>
+<pre><code>#ifndef CHATROOM_H
+/**
+ * @file ChatRoom.h
+ * @brief Abstract base class for chat rooms. Manages users and message flow.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define CHATROOM_H
+
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &quot;UserIterator.h&quot;
+
+class Users;
+
+/**
+ * @class ChatRoom
+ * @brief Abstract base class for chat rooms. Manages users and message flow.
+ *
+ * Responsibilities:
+ * - Register and remove users
+ * - Send and save messages
+ * - Provide iterators for users
+ */
+class ChatRoom {
+
+private:
+	//std::vector&lt;Users*&gt; users; // track all users in this chat room
+	std::string* chatHistory = nullptr;
+
+public:
+	
+	virtual ~ChatRoom() { delete chatHistory; }
+    
+    // Abstract methods - must be implemented by derived classes
+    /**
+     * @brief Register a user to the chat room.
+     * @param user Reference to the user to register.
+     */
+    virtual void registerUser(Users&amp; user) = 0;
+    /**
+     * @brief Remove a user from the chat room.
+     * @param user Reference to the user to remove.
+     */
+    virtual void removeUser(Users&amp; user) = 0;
+    /**
+     * @brief Send a message from a user to all users in the chat room.
+     * @param message The message to send.
+     * @param fromUser The user sending the message.
+     */
+    virtual void sendMessage(const std::string&amp; message, Users&amp; fromUser) = 0;
+    
+    /**
+     * @brief Create an iterator for the users in the chat room.
+     * @return Pointer to a UserIterator.
+     */
+    virtual UserIterator* createUserIterator() = 0;
+    /**
+     * @brief Get the number of users in the chat room.
+     * @return Number of users.
+     */
+    virtual int getUserCount() = 0;
+
+
+    // Concrete method for saving messages
+    /**
+     * @brief Save a message to the chat history.
+     * @param message The message to save.
+     * @param fromUser The user who sent the message.
+     */
+    void saveMessage(const std::string&amp; message, Users&amp; fromUser);
+};
+
+#endif
+</code></pre>
+</div>
+
+<div class="section" id="Command_cpp">
+<h2>Command.cpp</h2>
+<pre><code>/**
+ * @file Command.cpp
+ * @brief Provides a defensive default implementation (should not be used).
+ *
+ * The base Command interface declares a pure virtual execute(), but providing
+ * a definition that throws can help during debugging if a vtable mismatch
+ * occurs or a call is made on a partially constructed object.
+ */
+
+#include &quot;Command.h&quot;
+
+void Command::execute() {
+    throw &quot;Command::execute() called on abstract base - should be overridden&quot;;
+}
+</code></pre>
+</div>
+
+<div class="section" id="Command_h">
+<h2>Command.h</h2>
+<pre><code>#ifndef COMMAND_H
+/**
+ * @file Command.h
+ * @brief Abstract base class for command pattern in chat system.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define COMMAND_H
+
+#include &lt;string&gt;
+
+// Forward declarations
+class ChatRoom;
+class Users;
+
+/**
+ * @class Command
+ * @brief Abstract base class for command pattern in chat system.
+ *
+ * Attributes:
+ * - chatRoom: Target chat room
+ * - fromUser: User who issued the command
+ * - message: Message content
+ *
+ * Responsibilities:
+ * - Encapsulate actions as objects
+ * - Provide execute() interface
+ */
+class Command {
+protected:
+    ChatRoom* chatRoom;
+    Users* fromUser;
+    std::string message;
+
+public:
+    /**
+     * @brief Construct a Command object.
+     * @param room Target chat room.
+     * @param user User who issued the command.
+     * @param msg Message content.
+     */
+    Command(ChatRoom* room, Users* user, const std::string&amp; msg)
+        : chatRoom(room), fromUser(user), message(msg) {}
+    
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~Command() = default;
+    /**
+     * @brief Execute the command.
+     */
+    virtual void execute() = 0;
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="ConcreteUserIterator_h">
+<h2>ConcreteUserIterator.h</h2>
+<pre><code>#ifndef CONCRETEUSERITERATOR_H
+/**
+ * @file ConcreteUserIterator.h
+ * @brief Concrete iterator for traversing users in a chat room.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define CONCRETEUSERITERATOR_H
+
+#include &quot;UserIterator.h&quot;
+#include &quot;Users.h&quot;
+#include &lt;vector&gt;
+
+/**
+ * @class ConcreteUserIterator
+ * @brief Concrete iterator for traversing users in a chat room.
+ *
+ * Attributes:
+ * - userList: Reference to user list
+ * - currentIndex: Current position in iteration
+ *
+ * Responsibilities:
+ * - Traverse users without exposing internal structure
+ */
+class ConcreteUserIterator : public UserIterator {
+private:
+    std::vector&lt;Users*&gt;&amp; userList;
+    size_t currentIndex;
+
+public:
+    /**
+     * @brief Construct a ConcreteUserIterator.
+     * @param users Reference to the user list to iterate over.
+     */
+    ConcreteUserIterator(std::vector&lt;Users*&gt;&amp; users) 
+        : userList(users), currentIndex(0) {}
+
+    /**
+     * @brief Check if there are more users to iterate over.
+     * @return True if more users exist, false otherwise.
+     */
+    bool hasNext() override {
+        return currentIndex &lt; userList.size();
+    }
+
+    /**
+     * @brief Get the next user in the iteration.
+     * @return Pointer to the next user, or nullptr if done.
+     */
+    Users* next() override {
+        if (hasNext()) {
+            return userList[currentIndex++];
+        }
+        return nullptr;
+    }
+
+    /**
+     * @brief Reset the iterator to the beginning.
+     */
+    void reset() override {
+        currentIndex = 0;
+    }
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="CtrlCat_h">
+<h2>CtrlCat.h</h2>
+<pre><code>/**
+ * @file CtrlCat.h
+ * @brief Concrete chat room (mediator) implementation named CtrlCat.
+ *
+ * Provides storage for Users and orchestrates broadcasting messages. Uses the
+ * Iterator pattern (ConcreteUserIterator) to traverse users without exposing
+ * the underlying container type.
+ */
+#ifndef CTRLCAT_H
+#define CTRLCAT_H
+
+#include &quot;ChatRoom.h&quot;
+#include &quot;Users.h&quot;
+#include &quot;ConcreteUserIterator.h&quot;
+#include &lt;vector&gt;
+
+/**
+ * @class CtrlCat
+ * @brief Concrete ChatRoom used in tests/demonstrations.
+ */
+class CtrlCat : public ChatRoom {
+private:
+    std::vector&lt;Users*&gt; users; ///&lt; Registered users in this room.
+
+public:
+    /** @copydoc ChatRoom::registerUser */
+    void registerUser(Users&amp; user) override {
+        users.push_back(&amp;user);
+    }
+    
+    /** @copydoc ChatRoom::removeUser */
+    void removeUser(Users&amp; user) override {
+        for (auto it = users.begin(); it != users.end(); ++it) {
+            if (*it == &amp;user) {
+                users.erase(it);
+                break;
+            }
+        }
+    }
+    
+    /** @copydoc ChatRoom::sendMessage */
+    void sendMessage(const std::string&amp; message, Users&amp; fromUser) override {
+        UserIterator* iterator = createUserIterator();
+        while (iterator-&gt;hasNext()) {
+            Users* user = iterator-&gt;next();
+            if (user &amp;&amp; user != &amp;fromUser) {
+                if (user-&gt;isActive()) {
+                    user-&gt;receive(message, fromUser, *this);
+                } else {
+                    std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; is &quot; &lt;&lt; user-&gt;getStatus() 
+                              &lt;&lt; &quot; - message handling varies\n&quot;;
+                    user-&gt;receive(message, fromUser, *this);
+                }
+            }
+        }
+        delete iterator;
+    }
+
+    /** @copydoc ChatRoom::createUserIterator */
+    UserIterator* createUserIterator() override {
+        return new ConcreteUserIterator(users);
+    }
+    
+    /** @copydoc ChatRoom::getUserCount */
+    int getUserCount() override {
+        return static_cast&lt;int&gt;(users.size());
+    }
+    
+    /**
+     * @brief Utility method to print all users to stdout.
+     */
+    void listAllUsers() {
+        std::cout &lt;&lt; &quot;CtrlCat users: &quot;;
+        UserIterator* iterator = createUserIterator();
+        while (iterator-&gt;hasNext()) {
+            Users* user = iterator-&gt;next();
+            std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; &quot;;
+        }
+        std::cout &lt;&lt; std::endl;
+        delete iterator;
+    }
+};
+
+#endif
+</code></pre>
+</div>
+
+<div class="section" id="Dogorithm_h">
+<h2>Dogorithm.h</h2>
+<pre><code>#ifndef DOGORITHM_H
+/**
+ * @file Dogorithm.h
+ * @brief Concrete chat room for dog lovers.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define DOGORITHM_H
+
+#include &quot;ChatRoom.h&quot;
+#include &quot;Users.h&quot;
+#include &lt;vector&gt;
+#include &quot;ConcreteUserIterator.h&quot;
+
+/**
+ * @class Dogorithm
+ * @brief Concrete chat room for dog lovers.
+ *
+ * Attributes:
+ * - users: List of users in the room
+ *
+ * Responsibilities:
+ * - Register/remove users
+ * - Send messages to users
+ * - Provide user iterator
+ */
+class Dogorithm : public ChatRoom {
+private:
+    std::vector&lt;Users*&gt; users;
+
+public:
+    /**
+     * @brief Register a user to the Dogorithm chat room.
+     * @param user Reference to the user to register.
+     */
+    void registerUser(Users&amp; user) override {
+        users.push_back(&amp;user);
+    }
+    
+    /**
+     * @brief Remove a user from the Dogorithm chat room.
+     * @param user Reference to the user to remove.
+     */
+    void removeUser(Users&amp; user) override {
+        for (auto it = users.begin(); it != users.end(); ++it) {
+            if (*it == &amp;user) {
+                users.erase(it);
+                break;
+            }
+        }
+    }
+    
+    /**
+     * @brief Send a message from a user to all users in the Dogorithm chat room.
+     * @param message The message to send.
+     * @param fromUser The user sending the message.
+     */
+    void sendMessage(const std::string&amp; message, Users&amp; fromUser) override {
+    UserIterator* iterator = createUserIterator();
+    while (iterator-&gt;hasNext()) {
+        Users* user = iterator-&gt;next();
+        if (user &amp;&amp; user != &amp;fromUser) {
+            if (user-&gt;isActive()) {
+                user-&gt;receive(message, fromUser, *this);
+            } else {
+                std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; is &quot; &lt;&lt; user-&gt;getStatus() 
+                         &lt;&lt; &quot; - message handling varies\n&quot;;
+                user-&gt;receive(message, fromUser, *this);
+            }
+        }
+    }
+    delete iterator;
+}
+    
+    // New iterator methods
+    /**
+     * @brief Create an iterator for the users in the Dogorithm chat room.
+     * @return Pointer to a UserIterator.
+     */
+    UserIterator* createUserIterator() override {
+        return new ConcreteUserIterator(users);
+    }
+    
+    /**
+     * @brief Get the number of users in the Dogorithm chat room.
+     * @return Number of users.
+     */
+    int getUserCount() override {
+        return users.size();
+    }
+    
+    // Additional utility methods using iterator
+    /**
+     * @brief Print all users in the Dogorithm chat room.
+     */
+    void listAllUsers() {
+        std::cout &lt;&lt; &quot;CtrlCat users: &quot;;
+        UserIterator* iterator = createUserIterator();
+        while (iterator-&gt;hasNext()) {
+            Users* user = iterator-&gt;next();
+            std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; &quot;;
+        }
+        std::cout &lt;&lt; std::endl;
+        delete iterator;
+    }
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="InactiveState_cpp">
+<h2>InactiveState.cpp</h2>
+<pre><code>/**
+ * @file InactiveState.cpp
+ * @brief Implements the InactiveState behaviour.
+ */
+
+#include &quot;InactiveState.h&quot;
+#include &quot;Users.h&quot;
+#include &quot;ChatRoom.h&quot;
+#include &lt;iostream&gt;
+
+void InactiveState::handleMessage(Users* user, const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) {
+    std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; is INACTIVE - message queued: &quot; &lt;&lt; message &lt;&lt; std::endl;
+}
+
+std::string InactiveState::getStatusName() {
+    return &quot;Inactive&quot;;
+}
+
+bool InactiveState::canReceiveMessages() {
+    return false;
+}</code></pre>
+</div>
+
+<div class="section" id="InactiveState_h">
+<h2>InactiveState.h</h2>
+<pre><code>/**
+ * @file InactiveState.h
+ * @brief Concrete state representing an inactive user.
+ *
+ * Inactive users do not actively receive messages; messages could be queued.
+ */
+#ifndef INACTIVESTATE_H
+#define INACTIVESTATE_H
+
+#include &quot;UserState.h&quot;
+
+/**
+ * @class InactiveState
+ * @brief Implements behaviour for users that are inactive.
+ */
+class InactiveState : public UserState {
+public:
+    /**
+     * @brief Handle a message for an inactive user (currently logs queuing).
+     */
+    void handleMessage(Users* user, const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) override;
+    /**
+     * @brief Get the status name.
+     * @return &quot;Inactive&quot;.
+     */
+    std::string getStatusName() override;
+    /**
+     * @brief Whether inactive users can immediately receive messages.
+     * @return false.
+     */
+    bool canReceiveMessages() override;
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="SaveMessageCommand_cpp">
+<h2>SaveMessageCommand.cpp</h2>
+<pre><code>/**
+ * @file SaveMessageCommand.cpp
+ * @brief Implements the SaveMessageCommand behaviour.
+ */
+
+#include &quot;SaveMessageCommand.h&quot;
+#include &quot;ChatRoom.h&quot;
+#include &quot;Users.h&quot;
+
+void SaveMessageCommand::execute() {
+    if (chatRoom &amp;&amp; fromUser) {
+        chatRoom-&gt;saveMessage(message, *fromUser);
+    }
+}</code></pre>
+</div>
+
+<div class="section" id="SaveMessageCommand_h">
+<h2>SaveMessageCommand.h</h2>
+<pre><code>#ifndef SAVEMESSAGECOMMAND_H
+/**
+ * @file SaveMessageCommand.h
+ * @brief Command to save a message to chat history.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define SAVEMESSAGECOMMAND_H
+
+#include &quot;Command.h&quot;
+
+/**
+ * @class SaveMessageCommand
+ * @brief Command to save a message to chat history.
+ *
+ * Responsibilities:
+ * - Save a message to the chat room&#x27;s history
+ */
+class SaveMessageCommand : public Command {
+public:
+    /**
+     * @brief Construct a SaveMessageCommand object.
+     * @param room Target chat room.
+     * @param user User who sends the message.
+     * @param msg Message content.
+     */
+    SaveMessageCommand(ChatRoom* room, Users* user, const std::string&amp; msg)
+        : Command(room, user, msg) {}
+    
+    /**
+     * @brief Execute the save message command.
+     */
+    void execute() override;
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="SendMessageCommand_cpp">
+<h2>SendMessageCommand.cpp</h2>
+<pre><code>/**
+ * @file SendMessageCommand.cpp
+ * @brief Implements the SendMessageCommand behaviour.
+ */
+
+#include &quot;SendMessageCommand.h&quot;
+#include &quot;ChatRoom.h&quot;
+#include &quot;Users.h&quot;
+
+void SendMessageCommand::execute() {
+    if (chatRoom &amp;&amp; fromUser) {
+        chatRoom-&gt;sendMessage(message, *fromUser);
+    }
+}</code></pre>
+</div>
+
+<div class="section" id="SendMessageCommand_h">
+<h2>SendMessageCommand.h</h2>
+<pre><code>#ifndef SENDMESSAGECOMMAND_H
+/**
+ * @file SendMessageCommand.h
+ * @brief Command to send a message to all users in a chat room.
+ * @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define SENDMESSAGECOMMAND_H
+
+#include &quot;Command.h&quot;
+
+/**
+ * @class SendMessageCommand
+ * @brief Command to send a message to all users in a chat room.
+ *
+ * Responsibilities:
+ * - Deliver a message to all users in the room
+ */
+class SendMessageCommand : public Command {
+public:
+    /**
+     * @brief Construct a SendMessageCommand object.
+     * @param room Target chat room.
+     * @param user User who sends the message.
+     * @param msg Message content.
+     */
+    SendMessageCommand(ChatRoom* room, Users* user, const std::string&amp; msg)
+        : Command(room, user, msg) {}
+    
+    /**
+     * @brief Execute the send message command.
+     */
+    void execute() override;
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="TestingMain_cpp">
+<h2>TestingMain.cpp</h2>
+<pre><code>/**
+ * @file TestingMain.cpp
+ * @brief Manual test harness exercising Mediator, Command, Iterator &amp; State patterns.
+ */
+
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &quot;Users.h&quot;
+#include &quot;CtrlCat.h&quot;
+#include &quot;Dogorithm.h&quot;
+#include &quot;SendMessageCommand.h&quot;
+#include &quot;SaveMessageCommand.h&quot;
+
+int main() {
+    // Concrete chat rooms (mediators)
+    CtrlCat ctrlCat;
+    Dogorithm dogorithm;
+
+    // Users (colleagues)
+    Users Aaron(&quot;Aaron&quot;);
+    Users Adamian(&quot;Adamian&quot;);
+    Users Ayrtonn(&quot;Ayrtonn&quot;);
+
+    // Register users (Adamian is in both rooms - meets spec requirement)
+    ctrlCat.registerUser(Aaron);
+    ctrlCat.registerUser(Adamian);
+    ctrlCat.registerUser(Ayrtonn);
+
+    dogorithm.registerUser(Ayrtonn);
+    dogorithm.registerUser(Adamian);
+
+    std::cout &lt;&lt; &quot;=== Testing Command Pattern ===\n&quot;;
+    std::cout &lt;&lt; &quot;Each send() creates SendMessageCommand and SaveMessageCommand\n\n&quot;;
+
+    std::cout &lt;&lt; &quot;=== CtrlCat Room ===\n&quot;;
+    // create and execute SendMessageCommand + SaveMessageCommand
+    Aaron.send(&quot;Hi everyone, Aaron here!&quot;, ctrlCat);
+    Adamian.send(&quot;Hey Aaron, Adamian joining in.&quot;, ctrlCat);
+
+    std::cout &lt;&lt; &quot;\n=== Dogorithm Room ===\n&quot;;
+    // create and execute SendMessageCommand + SaveMessageCommand
+    Ayrtonn.send(&quot;Ayrtonn here in Dogorithm.&quot;, dogorithm);
+    Adamian.send(&quot;Hi Ayrtonn, Adamian here!&quot;, dogorithm);
+
+    std::cout &lt;&lt; &quot;\n=== Manual Command Testing ===\n&quot;;
+    std::cout &lt;&lt; &quot;Creating and executing individual commands manually:\n&quot;;
+    
+    // Test individual commands manually
+    SendMessageCommand* sendCmd = new SendMessageCommand(&amp;ctrlCat, &amp;Aaron, &quot;Manual send command test&quot;);
+    SaveMessageCommand* saveCmd = new SaveMessageCommand(&amp;ctrlCat, &amp;Aaron, &quot;Manual save command test&quot;);
+    
+    Aaron.addCommand(sendCmd);
+    Aaron.addCommand(saveCmd);
+    
+    std::cout &lt;&lt; &quot;Executing all queued commands...\n&quot;;
+    Aaron.executeAll();
+
+    std::cout &lt;&lt; &quot;\n=== Testing Multi-room User (Adamian) ===\n&quot;;
+    std::cout &lt;&lt; &quot;Adamian sends to both rooms (meets spec requirement):\n&quot;;
+    Adamian.send(&quot;I&#x27;m in both rooms!&quot;, ctrlCat);
+    Adamian.send(&quot;Same person, different room!&quot;, dogorithm);
+
+    std::cout &lt;&lt; &quot;\n=== Remove User Test ===\n&quot;;
+    std::cout &lt;&lt; &quot;Before removal - CtrlCat has: Aaron, Adamian, Ayrtonn\n&quot;;
+    ctrlCat.removeUser(Adamian);
+    std::cout &lt;&lt; &quot;After removal - CtrlCat has: Aaron, Ayrtonn\n&quot;;
+    Aaron.send(&quot;After removing Adamian, this should not reach him.&quot;, ctrlCat);
+
+
+    std::cout &lt;&lt; &quot;\n=== Iterator Pattern Demo ===\n&quot;;
+std::cout &lt;&lt; &quot;Using Iterator to traverse users without exposing internal structure:\n&quot;;
+
+// Demonstrate iterator on CtrlCat
+std::cout &lt;&lt; &quot;\nCtrlCat users (using iterator): &quot;;
+UserIterator* ctrlCatIter = ctrlCat.createUserIterator();
+while (ctrlCatIter-&gt;hasNext()) {
+    Users* user = ctrlCatIter-&gt;next();
+    std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; &quot;;
+}
+std::cout &lt;&lt; &quot;\n&quot;;
+delete ctrlCatIter;
+
+// Demonstrate iterator on Dogorithm
+std::cout &lt;&lt; &quot;Dogorithm users (using iterator): &quot;;
+UserIterator* dogorithmIter = dogorithm.createUserIterator();
+while (dogorithmIter-&gt;hasNext()) {
+    Users* user = dogorithmIter-&gt;next();
+    std::cout &lt;&lt; user-&gt;getName() &lt;&lt; &quot; &quot;;
+}
+std::cout &lt;&lt; &quot;\n&quot;;
+delete dogorithmIter;
+
+// Show user counts
+std::cout &lt;&lt; &quot;\nUser counts:\n&quot;;
+std::cout &lt;&lt; &quot;CtrlCat: &quot; &lt;&lt; ctrlCat.getUserCount() &lt;&lt; &quot; users\n&quot;;
+std::cout &lt;&lt; &quot;Dogorithm: &quot; &lt;&lt; dogorithm.getUserCount() &lt;&lt; &quot; users\n&quot;;
+
+// Demonstrate iterator reset functionality
+std::cout &lt;&lt; &quot;\nTesting iterator reset:\n&quot;;
+UserIterator* resetIter = ctrlCat.createUserIterator();
+std::cout &lt;&lt; &quot;First pass: &quot;;
+while (resetIter-&gt;hasNext()) {
+    std::cout &lt;&lt; resetIter-&gt;next()-&gt;getName() &lt;&lt; &quot; &quot;;
+}
+std::cout &lt;&lt; &quot;\nAfter reset: &quot;;
+resetIter-&gt;reset();
+while (resetIter-&gt;hasNext()) {
+    std::cout &lt;&lt; resetIter-&gt;next()-&gt;getName() &lt;&lt; &quot; &quot;;
+}
+std::cout &lt;&lt; &quot;\n&quot;;
+delete resetIter;
+
+
+std::cout &lt;&lt; &quot;\n=== State Pattern Demo ===\n&quot;;
+std::cout &lt;&lt; &quot;Testing different user states and behaviors:\n&quot;;
+
+// Show initial states (all start Active)
+std::cout &lt;&lt; &quot;\nInitial states:\n&quot;;
+std::cout &lt;&lt; &quot;Aaron: &quot; &lt;&lt; Aaron.getStatus() &lt;&lt; &quot; | &quot;;
+std::cout &lt;&lt; &quot;Adamian: &quot; &lt;&lt; Adamian.getStatus() &lt;&lt; &quot; | &quot;;
+std::cout &lt;&lt; &quot;Ayrtonn: &quot; &lt;&lt; Ayrtonn.getStatus() &lt;&lt; &quot;\n&quot;;
+
+// Baseline test with all active
+std::cout &lt;&lt; &quot;\nBaseline (all active):\n&quot;;
+Ayrtonn.send(&quot;Hello everyone!&quot;, ctrlCat);
+
+// Change states and test different behaviors
+std::cout &lt;&lt; &quot;\nChanging states: Aaron-&gt;Away, Adamian-&gt;Inactive\n&quot;;
+Aaron.goAway();
+Adamian.goInactive();
+
+std::cout &lt;&lt; &quot;Updated states:\n&quot;;
+std::cout &lt;&lt; &quot;Aaron: &quot; &lt;&lt; Aaron.getStatus() &lt;&lt; &quot; | &quot;;
+std::cout &lt;&lt; &quot;Adamian: &quot; &lt;&lt; Adamian.getStatus() &lt;&lt; &quot; | &quot;;
+std::cout &lt;&lt; &quot;Ayrtonn: &quot; &lt;&lt; Ayrtonn.getStatus() &lt;&lt; &quot;\n&quot;;
+
+std::cout &lt;&lt; &quot;\nTesting state-specific behaviors:\n&quot;;
+Ayrtonn.send(&quot;Notice different message handling!&quot;, ctrlCat);
+
+// Test state transitions
+std::cout &lt;&lt; &quot;\nState transitions: Aaron-&gt;Active, Adamian-&gt;Away\n&quot;;
+Aaron.goActive();
+Adamian.goAway();
+
+std::cout &lt;&lt; &quot;Final test with mixed states:\n&quot;;
+Aaron.send(&quot;Final state behavior test!&quot;, ctrlCat);
+
+// Reset for next tests
+Aaron.goActive();
+Adamian.goActive();
+Ayrtonn.goActive();
+
+return 0;
+}</code></pre>
+</div>
+
+<div class="section" id="UserIterator_h">
+<h2>UserIterator.h</h2>
+<pre><code>#ifndef USERITERATOR_H
+/**
+ * @file UserIterator.h
+ * @brief Abstract iterator for traversing users.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define USERITERATOR_H
+
+class Users;
+
+/**
+ * @class UserIterator
+ * @brief Abstract iterator for traversing users.
+ *
+ * Responsibilities:
+ * - Provide interface for user iteration
+ */
+class UserIterator {
+public:
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~UserIterator() = default;
+    /**
+     * @brief Check if there are more users to iterate over.
+     * @return True if more users exist, false otherwise.
+     */
+    virtual bool hasNext() = 0;
+    /**
+     * @brief Get the next user in the iteration.
+     * @return Pointer to the next user, or nullptr if done.
+     */
+    virtual Users* next() = 0;
+    /**
+     * @brief Reset the iterator to the beginning.
+     */
+    virtual void reset() = 0;
+};
+
+#endif</code></pre>
+</div>
+
+<div class="section" id="UserState_h">
+<h2>UserState.h</h2>
+<pre><code>#ifndef USERSTATE_H
+/**
+ * @file UserState.h
+ * @brief Abstract state for user status in the chat system.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define USERSTATE_H
+
+#include &lt;string&gt;
+
+class Users;
+class ChatRoom;
+
+/**
+ * @class UserState
+ * @brief Abstract state for user status in the chat system.
+ *
+ * Responsibilities:
+ * - Define interface for user state behavior
+ */
+class UserState {
+public:
+    /**
+     * @brief Virtual destructor.
+     */
+    virtual ~UserState() = default;
+    /**
+     * @brief Handle a message for a user in a given state.
+     * @param user The user receiving the message.
+     * @param message The message content.
+     * @param fromUser The user who sent the message.
+     * @param room The chat room where the message was sent.
+     */
+    virtual void handleMessage(Users* user, const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) = 0;
+    /**
+     * @brief Get the name of the current state.
+     * @return The status name as a string.
+     */
+    virtual std::string getStatusName() = 0;
+    /**
+     * @brief Check if the user can receive messages in this state.
+     * @return True if can receive, false otherwise.
+     */
+    virtual bool canReceiveMessages() = 0;
+};
+
+#endif
+
+</code></pre>
+</div>
+
+<div class="section" id="Users_cpp">
+<h2>Users.cpp</h2>
+<pre><code>/**
+ * @file Users.cpp
+ * @brief Implements the Users base class behaviour.
+ */
+
+#include &quot;Users.h&quot;
+#include &quot;Command.h&quot;
+#include &quot;SendMessageCommand.h&quot; 
+#include &quot;SaveMessageCommand.h&quot;
+#include &quot;ChatRoom.h&quot;
+#include &quot;ActiveState.h&quot;
+#include &quot;InactiveState.h&quot;
+#include &quot;AwayState.h&quot;
+#include &lt;iostream&gt;
+
+// Constructors -------------------------------------------------------------
+
+Users::Users(std::string name) : name(name), currentState(new ActiveState()) {}
+Users::Users(const char* name) : name(name ? name : &quot;&quot;), currentState(new ActiveState()) {}
+
+Users::~Users() {
+    delete currentState;
+}
+
+// State management ---------------------------------------------------------
+
+void Users::setState(UserState* newState) {
+    delete currentState;
+    currentState = newState;
+}
+
+void Users::goActive()   { setState(new ActiveState()); }
+void Users::goInactive() { setState(new InactiveState()); }
+void Users::goAway()     { setState(new AwayState()); }
+
+// Messaging ----------------------------------------------------------------
+
+void Users::send(const std::string&amp; message, ChatRoom&amp; room) {
+    addCommand(new SendMessageCommand(&amp;room, this, message));
+    addCommand(new SaveMessageCommand(&amp;room, this, message));
+    executeAll();
+}
+
+void Users::receive(const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room) {
+    currentState-&gt;handleMessage(this, message, fromUser, room);
+}
+
+// Command queue ------------------------------------------------------------
+
+void Users::addCommand(Command* command) {
+    commandQueue.push_back(command);
+}
+
+void Users::executeAll() {
+    for (Command* cmd : commandQueue) {
+        if (cmd) {
+            cmd-&gt;execute();
+            delete cmd;
+        }
+    }
+    commandQueue.clear();
+}
+
+// Status helpers -----------------------------------------------------------
+
+std::string Users::getStatus() {
+    return currentState-&gt;getStatusName();
+}
+
+bool Users::isActive() {
+    return currentState-&gt;canReceiveMessages();
+}</code></pre>
+</div>
+
+<div class="section" id="Users_h">
+<h2>Users.h</h2>
+<pre><code>#ifndef USERS_H
+/**
+ * @file Users.h
+ * @brief Abstract base class for users in the chat system.
+* @author Aaron Kim, Damian Moustakis
+ * @date 2025-09-30
+ */
+#define USERS_H
+
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+// Forward declarations only
+class UserState;
+class ChatRoom;
+class Command;
+
+/**
+ * @class Users
+ * @brief Abstract base class for users in the chat system.
+ *
+ * Attributes:
+ * - currentState: The current state of the user (Active, Away, Inactive)
+ * - chatRooms: Rooms the user is part of
+ * - name: User&#x27;s name
+ * - commandQueue: Commands to be executed
+ *
+ * Responsibilities:
+ * - Send and receive messages
+ * - Manage state and commands
+ */
+class Users {
+private:
+    UserState* currentState;
+    std::vector&lt;std::string&gt; queuedMessages;
+
+protected:
+    std::vector&lt;ChatRoom*&gt; chatRooms;
+    std::string name;
+    std::vector&lt;Command*&gt; commandQueue;
+
+public:
+    Users() = default;
+    explicit Users(std::string name);
+    Users(const char* name);
+    ~Users();
+
+    /**
+     * @brief Send a message to a chat room.
+     * @param message The message to send.
+     * @param room The chat room to send the message to.
+     */
+    void send(const std::string&amp; message, ChatRoom&amp; room);
+    /**
+     * @brief Receive a message from another user.
+     * @param message The message received.
+     * @param fromUser The user who sent the message.
+     * @param room The chat room where the message was sent.
+     */
+    void receive(const std::string&amp; message, Users&amp; fromUser, ChatRoom&amp; room);
+    /**
+     * @brief Add a command to the user&#x27;s command queue.
+     * @param command Pointer to the command to add.
+     */
+    void addCommand(Command* command);
+    /**
+     * @brief Execute all commands in the user&#x27;s command queue.
+     */
+    void executeAll();
+
+    /**
+     * @brief Get the user&#x27;s name.
+     * @return The user&#x27;s name.
+     */
+    const std::string&amp; getName() const { return name; }
+    
+    /**
+     * @brief Set the user&#x27;s state.
+     * @param newState Pointer to the new state.
+     */
+    void setState(UserState* newState);
+    /**
+     * @brief Get the user&#x27;s status as a string.
+     * @return The user&#x27;s status.
+     */
+    std::string getStatus();
+    /**
+     * @brief Check if the user is active.
+     * @return True if active, false otherwise.
+     */
+    bool isActive();
+    
+    /**
+     * @brief Set the user to active state.
+     */
+    void goActive();
+    /**
+     * @brief Set the user to inactive state.
+     */
+    void goInactive();
+    /**
+     * @brief Set the user to away state.
+     */
+    void goAway();
+    
+};
+
+#endif</code></pre>
+</div>
+
+<hr /><p class="small">End of consolidated documentation.</p></body></html>

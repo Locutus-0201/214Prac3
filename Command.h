@@ -9,7 +9,7 @@
 
 #include <string>
 
-// Forward declarations
+// Forward declares
 class ChatRoom;
 class Users;
 
@@ -45,6 +45,8 @@ public:
     /**
      * @brief Virtual destructor.
      */
+
+     
     virtual ~Command() = default;
     /**
      * @brief Execute the command.

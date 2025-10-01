@@ -2,12 +2,11 @@
  * @file Aaron.h
  * @brief Declares the concrete user type Aaron.
  *
- * A lightweight concrete Users subclass used to demonstrate that the system
- * can support many specific user/persona classes without additional logic.
- * Additional behaviour could be added here in future (e.g. custom filters).
+ * A concrete Users subclass used to demonstrate that the system
+ * can support many specific user/persona classes without additional logic changes.
  *
  * @author Aaron Kim, Damian Moustakis
- * @date 2025-10-01
+ * @date 2025-09-30
  */
 #ifndef AARON_H
 #define AARON_H
