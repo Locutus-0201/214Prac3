@@ -1,3 +1,8 @@
+/**
+ * @file SendMessageCommand.cpp
+ * @brief Implements the SendMessageCommand behaviour.
+ */
+
 #include "SendMessageCommand.h"
 #include "ChatRoom.h"
 #include "Users.h"

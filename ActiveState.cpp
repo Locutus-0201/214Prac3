@@ -1,3 +1,8 @@
+/**
+ * @file ActiveState.cpp
+ * @brief Implements the ActiveState behaviour.
+ */
+
 #include "ActiveState.h"
 #include "Users.h"
 #include "ChatRoom.h"

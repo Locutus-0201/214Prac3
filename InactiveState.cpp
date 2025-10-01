@@ -1,3 +1,8 @@
+/**
+ * @file InactiveState.cpp
+ * @brief Implements the InactiveState behaviour.
+ */
+
 #include "InactiveState.h"
 #include "Users.h"
 #include "ChatRoom.h"

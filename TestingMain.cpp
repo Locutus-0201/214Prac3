@@ -1,3 +1,8 @@
+/**
+ * @file TestingMain.cpp
+ * @brief Manual test harness exercising Mediator, Command, Iterator & State patterns.
+ */
+
 #include <iostream>
 #include <string>
 #include "Users.h"

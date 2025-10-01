@@ -1,3 +1,11 @@
+/**
+ * @file CtrlCat.h
+ * @brief Concrete chat room (mediator) implementation named CtrlCat.
+ *
+ * Provides storage for Users and orchestrates broadcasting messages. Uses the
+ * Iterator pattern (ConcreteUserIterator) to traverse users without exposing
+ * the underlying container type.
+ */
 #ifndef CTRLCAT_H
 #define CTRLCAT_H
 
@@ -6,15 +14,21 @@
 #include "ConcreteUserIterator.h"
 #include <vector>
 
+/**
+ * @class CtrlCat
+ * @brief Concrete ChatRoom used in tests/demonstrations.
+ */
 class CtrlCat : public ChatRoom {
 private:
-    std::vector<Users*> users;
+    std::vector<Users*> users; ///< Registered users in this room.
 
 public:
+    /** @copydoc ChatRoom::registerUser */
     void registerUser(Users& user) override {
         users.push_back(&user);
     }
     
+    /** @copydoc ChatRoom::removeUser */
     void removeUser(Users& user) override {
         for (auto it = users.begin(); it != users.end(); ++it) {
             if (*it == &user) {
@@ -24,32 +38,37 @@ public:
         }
     }
     
+    /** @copydoc ChatRoom::sendMessage */
     void sendMessage(const std::string& message, Users& fromUser) override {
-    UserIterator* iterator = createUserIterator();
-    while (iterator->hasNext()) {
-        Users* user = iterator->next();
-        if (user && user != &fromUser) {
-            if (user->isActive()) {
-                user->receive(message, fromUser, *this);
-            } else {
-                std::cout << user->getName() << " is " << user->getStatus() 
-                         << " - message handling varies\n";
-                user->receive(message, fromUser, *this);
+        UserIterator* iterator = createUserIterator();
+        while (iterator->hasNext()) {
+            Users* user = iterator->next();
+            if (user && user != &fromUser) {
+                if (user->isActive()) {
+                    user->receive(message, fromUser, *this);
+                } else {
+                    std::cout << user->getName() << " is " << user->getStatus() 
+                              << " - message handling varies\n";
+                    user->receive(message, fromUser, *this);
+                }
             }
         }
+        delete iterator;
     }
-    delete iterator;
-}
 
+    /** @copydoc ChatRoom::createUserIterator */
     UserIterator* createUserIterator() override {
         return new ConcreteUserIterator(users);
     }
     
+    /** @copydoc ChatRoom::getUserCount */
     int getUserCount() override {
-        return users.size();
+        return static_cast<int>(users.size());
     }
     
-    // Additional utility methods using iterator
+    /**
+     * @brief Utility method to print all users to stdout.
+     */
     void listAllUsers() {
         std::cout << "CtrlCat users: ";
         UserIterator* iterator = createUserIterator();
